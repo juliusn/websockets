@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  ul#messages
+    form#chat(action="")
+      input#m(type='text', autocomplete='off', autofocus=true)
+      button#send(type='submit') Send
+
+  script.
+    const chat = document.querySelector('#chat');
+    const button = document.querySelector('#send');
+    chat.addEventListener('submit', function(ev) {
+      ev.preventDefault()
+    });
+    button.addEventListener('click', function(ev) {
+      sendMessage();
+    });
+
+    const messageList = document.querySelector('#messages');
+    const textField = document.querySelector('#m');
+    const socket = io();
+    const sendMessage = function() {
+
+      const message = textField.value.trim();
+      if (message.length > 0) socket.emit('message', message);
+      textField.value = "";
+    };
+
+    socket.on('message', function(msg) {
+      const listNode = document.createElement('LI');
+      const messageNode = document.createTextNode(msg);
+      listNode.appendChild(messageNode);
+      messageList.appendChild(listNode);
+    });
