@@ -6,7 +6,6 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const app = express();
-const port = 3100;
 const Server = require('http').Server;
 const http = new Server(app);
 const io = require('socket.io')(http);
@@ -15,6 +14,7 @@ const io = require('socket.io')(http);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -22,7 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -40,6 +39,7 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
+// socket connectivity
 io.on('connection', (socket) => {
   const id = socket.id;
   socket.on('message', (msg) => {
@@ -54,8 +54,8 @@ io.on('connection', (socket) => {
   });
 });
 
-http.listen(port, () => {
-  console.log('listening on *:' + port);
+http.listen(3000, () => {
+  console.log('listening on *:3000');
 });
 
 module.exports = app;

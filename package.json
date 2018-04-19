@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -11,11 +11,25 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
+    "node-emoji": "^1.8.1",
+    "npm": "^5.8.0",
     "pug": "2.0.0-beta11",
     "socket.io": "^2.1.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1"
-  }
+  },
+  "description": "Socket test",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliusn/websockets.git"
+  },
+  "author": "Julius Niiniranta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juliusn/websockets/issues"
+  },
+  "homepage": "https://github.com/juliusn/websockets#readme"
 }
